@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C2 Job Copilot — Day 18 Track 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Điều hướng prototype">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">C2</div>
+          <div>
+            <p class="eyebrow">TRACK 1 · DAY 18</p>
+            <h1>Job Copilot</h1>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Các bước trải nghiệm">
+          <button class="nav-item active" data-view="onboarding"><span>01</span> Bắt đầu</button>
+          <button class="nav-item" data-view="brief"><span>02</span> Làm rõ yêu cầu</button>
+          <button class="nav-item" data-view="review"><span>03</span> Xem &amp; duyệt</button>
+          <button class="nav-item" data-view="recovery"><span>04</span> Khôi phục</button>
+          <button class="nav-item" data-view="feedback"><span>05</span> Phản hồi</button>
+        </nav>
+
+        <div class="side-note">
+          <div class="status-dot" aria-hidden="true"></div>
+          <div>
+            <strong>Prototype có thể bấm</strong>
+            <p>5 trạng thái, 6 nhánh quyết định</p>
+          </div>
+        </div>
+      </aside>
+
+      <main id="main" class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">C2-APP-013 · Synthetic-to-Real YOLO Dataset Pipeline</p>
+            <p class="context-line">Lát cắt: AI hỗ trợ tạo và duyệt một dataset generation job, không tự ý chạy GPU job.</p>
+          </div>
+          <button class="button button-ghost" id="open-scenarios">Xem kịch bản</button>
+        </header>
+
+        <section class="progress-bar" aria-label="Tiến độ trải nghiệm">
+          <div class="progress-step done"><span>✓</span><small>Kỳ vọng</small></div>
+          <div class="progress-line"></div>
+          <div class="progress-step active" id="progress-assist"><span>2</span><small>AI hỗ trợ</small></div>
+          <div class="progress-line"></div>
+          <div class="progress-step" id="progress-review"><span>3</span><small>Kiểm tra</small></div>
+          <div class="progress-line"></div>
+          <div class="progress-step" id="progress-recover"><span>4</span><small>Khôi phục</small></div>
+        </section>
+
+        <section class="view active" id="view-onboarding" aria-labelledby="onboarding-title">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow accent">LẦN ĐẦU SỬ DỤNG</p>
+              <h2 id="onboarding-title">Tạo dataset nhanh hơn, nhưng bạn vẫn quyết định lúc nào chạy job.</h2>
+              <p class="lead">Job Copilot đọc yêu cầu tự nhiên, đề xuất cấu hình PyBullet và tạo bản xem trước. Nó không tự khởi chạy workflow diffusion, không dùng dữ liệu ngoài job này, và luôn yêu cầu duyệt trước khi tạo dataset.</p>
+              <div class="hero-actions">
+                <button class="button button-primary" data-go="brief">Tạo job đầu tiên <span aria-hidden="true">→</span></button>
+                <button class="button button-ghost" id="show-boundaries">Xem giới hạn</button>
+              </div>
+            </div>
+            <div class="capability-card" aria-label="Khả năng và giới hạn của AI">
+              <div class="card-topline"><span class="pulse"></span> Năng lực được hiệu chỉnh</div>
+              <div class="capability-row"><span class="icon good">✓</span><div><strong>Có thể hỗ trợ</strong><p>Chuyển brief thành draft job, phát hiện input thiếu và giải thích trade-off.</p></div></div>
+              <div class="capability-row"><span class="icon caution">!</span><div><strong>Cần bạn duyệt</strong><p>Workflow tốn GPU/API, số lượng ảnh lớn và thay đổi preset training.</p></div></div>
+              <div class="capability-row"><span class="icon stop">×</span><div><strong>Không tự làm</strong><p>Không gửi dataset ra ngoài, không thay đổi benchmark hoặc xóa dữ liệu.</p></div></div>
+            </div>
+          </div>
+          <div class="privacy-strip">
+            <span class="shield" aria-hidden="true">⌁</span>
+            <p><strong>Kiểm soát dữ liệu:</strong> Bạn có thể bỏ qua onboarding, rút quyền dùng brief trong phiên này hoặc xóa draft trước khi chạy. Copilot chỉ dùng dữ liệu của job hiện tại để tạo đề xuất.</p>
+            <button class="text-button" id="revoke-context">Rút quyền dùng brief</button>
+          </div>
+          <div class="boundary-panel hidden" id="boundary-panel">
+            <strong>Giới hạn cụ thể</strong>
+            <ul>
+              <li>Copilot có thể suy ra object, số ảnh và workflow từ câu mô tả; các suy luận có nhãn “AI suy ra”.</li>
+              <li>Copilot không thể xác nhận GPU backend đang hoạt động cho tới khi chạy kiểm tra kết nối.</li>
+              <li>Job đã bắt đầu có thể dừng, nhưng ảnh đã sinh ra không tự bị xóa.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="view" id="view-brief" aria-labelledby="brief-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow accent">KỊCH BẢN T1 + T2 · ASK</p>
+              <h2 id="brief-title">Copilot đã hiểu một phần yêu cầu. Hãy làm rõ ít thông tin nhất có thể.</h2>
+            </div>
+            <span class="status-badge amber">Độ chắc chắn 62%</span>
+          </div>
+          <div class="two-column">
+            <div class="panel brief-panel">
+              <label for="brief-input">Bạn muốn tạo dataset như thế nào?</label>
+              <textarea id="brief-input" rows="4">Tạo khoảng 300 ảnh mug để train YOLO, nhìn thật hơn.</textarea>
+              <div class="inline-note"><span>AI hiểu:</span> 1 object · 300 ảnh · mục tiêu “realism”. <button class="text-button" id="edit-interpretation">Sửa cách AI hiểu</button></div>
+              <div class="suggestions" aria-label="Gợi ý trả lời">
+                <button class="chip" data-fill="Tôi cần 300 ảnh mug, background bàn bếp, để train YOLO. Chỉ tạo draft trước.">Chỉ tạo draft trước</button>
+                <button class="chip" data-fill="Tôi cần 300 ảnh mug, 12 backgrounds, workflow sd15. Ngân sách GPU tối đa 50k.">Có ngân sách GPU</button>
+                <button class="chip" data-fill="Tôi chưa biết workflow nào phù hợp, giải thích giúp tôi rồi mới tạo draft.">Giải thích workflow</button>
+              </div>
+              <button class="button button-primary full" id="analyze-brief">Phân tích yêu cầu <span aria-hidden="true">→</span></button>
+            </div>
+
+            <aside class="panel question-panel" id="clarifier" aria-live="polite">
+              <p class="eyebrow">COPILOT HỎI TRƯỚC KHI LẬP KẾ HOẠCH</p>
+              <h3>Một lựa chọn ảnh hưởng đáng kể đến chi phí và thời gian.</h3>
+              <p>“Nhìn thật hơn” có thể là <strong>SD1.5</strong> (cần backend diffusion) hoặc randomization mô phỏng. Tôi không nên tự chọn thay bạn.</p>
+              <fieldset>
+                <legend>Chọn cách xử lý ảnh</legend>
+                <label class="choice selected"><input type="radio" name="workflow" value="none" checked /><span><strong>Sim-only + randomization</strong><small>Nhanh, không cần GPU; realism thấp hơn.</small></span></label>
+                <label class="choice"><input type="radio" name="workflow" value="sd15" /><span><strong>SD1.5 realism pass</strong><small>Hình thực hơn; dùng GPU/API và có thể fail backend.</small></span></label>
+              </fieldset>
+              <div class="question-footer"><span class="reason">Vì sao hỏi? Lựa chọn này thay đổi cost, latency và đường khôi phục.</span><button class="button button-dark" id="continue-review">Tạo bản kế hoạch</button></div>
+            </aside>
+          </div>
+          <div class="signal-note"><strong>Implicit user feedback sẽ được ghi nhận:</strong> bạn đổi workflow, sửa brief, hoặc bỏ qua gợi ý. Đây là tín hiệu tham khảo cho UX; không tự động được hiểu là AI đã sai.</div>
+        </section>
+
+        <section class="view" id="view-review" aria-labelledby="review-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow accent">KỊCH BẢN T3 · EXPLAINABILITY + ACT</p>
+              <h2 id="review-title">Bản kế hoạch là đề xuất, chưa phải job đang chạy.</h2>
+            </div>
+            <span class="status-badge blue">Draft chưa gửi</span>
+          </div>
+          <div class="review-layout">
+            <article class="panel job-summary">
+              <div class="panel-header"><div><p class="eyebrow">JOB DRAFT #C2-184</p><h3>Mug · 300 ảnh · YOLO training</h3></div><button class="text-button" id="reset-draft">Xóa draft</button></div>
+              <div class="summary-grid">
+                <div><span>Object</span><strong>mug</strong><small>Nguồn: brief của bạn</small></div>
+                <div><span>Workflow</span><strong id="workflow-display">Sim-only</strong><small id="workflow-subtext">Đã chọn sau khi AI hỏi</small></div>
+                <div><span>Output</span><strong>300 ảnh</strong><small>AI suy ra từ “khoảng 300”</small></div>
+                <div><span>Preview</span><strong>5 ảnh</strong><small>AI tự thêm, có thể hoàn tác</small></div>
+              </div>
+              <div class="act-banner" id="act-banner"><span class="icon good">✓</span><div><strong>AI đã tự thêm 5 ảnh preview</strong><p>Đây là hành động rủi ro thấp, không tốn GPU và có thể hoàn tác trước khi chạy job.</p></div><button class="button button-small" id="undo-preview">Hoàn tác</button></div>
+              <div class="checklist">
+                <div class="check-row"><span class="check">✓</span><div><strong>Đủ object registry</strong><small><code>mug</code> có trong C2 object options.</small></div><button class="text-button details-trigger" data-details="objects">Xem nguồn</button></div>
+                <div class="check-row"><span class="check">✓</span><div><strong>Phạm vi mô phỏng khả thi</strong><small>Yaw, lighting và background sử dụng preset tiêu chuẩn.</small></div><button class="text-button details-trigger" data-details="preset">Xem logic</button></div>
+                <div class="check-row"><span class="warn">!</span><div><strong>Giá trị “realism” phụ thuộc workflow</strong><small id="realism-warning">Sim-only không xác nhận được độ gần ảnh thật.</small></div><button class="text-button details-trigger" data-details="cost">Xem trade-off</button></div>
+              </div>
+              <div class="approval-box"><div><p class="eyebrow">ASK TRƯỚC KHI HÀNH ĐỘNG</p><p>Chạy job có thể dùng GPU/API và sinh dữ liệu cần kiểm tra. Bạn duyệt cấu hình này chứ?</p></div><div class="approval-actions"><button class="button button-ghost" id="back-to-brief">Sửa cấu hình</button><button class="button button-primary" id="approve-job">Duyệt &amp; chạy kiểm tra</button></div></div>
+            </article>
+            <aside class="evidence-panel">
+              <div class="panel evidence-card"><p class="eyebrow">LỚP BẰNG CHỨNG</p><h3>Vì sao Copilot gợi ý cấu hình này?</h3><div id="evidence-content"><div class="evidence-item"><span>01</span><p><strong>Fact</strong> — brief có “mug”, “300 ảnh”, “train YOLO”.</p></div><div class="evidence-item"><span>02</span><p><strong>Assumption</strong> — “nhìn thật hơn” chưa đủ để tự chọn SD1.5.</p></div><div class="evidence-item"><span>03</span><p><strong>Constraint</strong> — SD1.5 cần backend; nếu không sẵn sàng, job phải dừng trước khi sinh dữ liệu.</p></div></div></div>
+              <div class="panel control-card"><p class="eyebrow">KIỂM SOÁT</p><ul><li>Sửa mọi trường trước khi chạy.</li><li>Không có hành động GPU/API khi chưa duyệt.</li><li>Dừng job sau khi chạy; review ảnh sinh ra trước khi train.</li></ul></div>
+            </aside>
+          </div>
+          <div class="modal-backdrop hidden" id="evidence-modal" role="dialog" aria-modal="true" aria-labelledby="evidence-modal-title">
+            <div class="modal"><button class="modal-close" aria-label="Đóng">×</button><p class="eyebrow">BẰNG CHỨNG &amp; GIẢ ĐỊNH</p><h3 id="evidence-modal-title">Chi tiết kiểm tra</h3><div id="modal-copy"></div></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-recovery" aria-labelledby="recovery-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow accent">KỊCH BẢN T6 + FAILURE · DON'T ACT</p>
+              <h2 id="recovery-title">Copilot phát hiện vấn đề trước khi tạo dữ liệu sai.</h2>
+            </div>
+            <span class="status-badge red">Job chưa khởi chạy</span>
+          </div>
+          <div class="recovery-grid">
+            <article class="panel alert-panel">
+              <div class="alert-icon">!</div>
+              <div><p class="eyebrow">KIỂM TRA BACKEND THẤT BẠI</p><h3>Không xác nhận được SD1.5 diffusion backend.</h3><p>Tôi không chạy fallback âm thầm vì bạn đã chọn realism pass. Nếu tự đổi sang sim-only, output có thể không đạt mục tiêu nhưng trông như thành công.</p></div>
+              <div class="recovery-options">
+                <button class="recovery-option selected" data-recovery="retry"><span class="radio"></span><div><strong>Thử kiểm tra backend lại</strong><p>Giữ đúng ý định ban đầu; mất thêm thời gian chờ.</p></div></button>
+                <button class="recovery-option" data-recovery="switch"><span class="radio"></span><div><strong>Chuyển sang sim-only draft</strong><p>Tạo 5 ảnh preview để bạn đánh giá, không chạy full dataset.</p></div></button>
+                <button class="recovery-option" data-recovery="save"><span class="radio"></span><div><strong>Lưu draft, không làm gì thêm</strong><p>Không dùng GPU/API; bạn có thể quay lại sau.</p></div></button>
+              </div>
+              <button class="button button-primary" id="recover-action">Thử kiểm tra lại</button>
+              <p class="recovery-footnote" id="recovery-footnote">Không hành động là lựa chọn hợp lệ khi rủi ro cao, thiếu dữ liệu hoặc thiếu quyền truy cập.</p>
+            </article>
+            <aside class="panel repair-panel">
+              <p class="eyebrow">SỬA LỖI THỨ HAI · AMBIGUITY</p>
+              <h3>“Coffee cup” có phải là <code>mug</code>?</h3>
+              <p>Copilot chỉ khớp với độ tin cậy 62%. Thay vì tự map sai object, hệ thống giữ job ở trạng thái draft.</p>
+              <div class="mapping-card"><div><span>Yêu cầu của bạn</span><strong>coffee cup</strong></div><span class="arrow">→</span><div><span>Registry candidate</span><strong>mug</strong></div></div>
+              <div class="mapping-actions"><button class="button button-dark" id="confirm-mapping">Đúng, dùng mug</button><button class="button button-ghost" id="change-object">Chọn object khác</button></div>
+              <div class="repair-result hidden" id="repair-result"><span class="check">✓</span><p><strong>Đã hiểu:</strong> dùng <code>mug</code> cho job hiện tại. Sửa này không được ghi thành sự thật chung cho mọi “coffee cup”.</p></div>
+            </aside>
+          </div>
+          <div class="recovery-steps" aria-label="Vòng khôi phục">
+            <div><span>1</span><p>Hệ thống nêu vấn đề và mức ảnh hưởng.</p></div><div><span>2</span><p>Người dùng chọn hướng khôi phục hoặc sửa input.</p></div><div><span>3</span><p>Copilot xác nhận điều gì đã đổi, điều gì không ghi nhớ.</p></div><div><span>4</span><p>Người dùng tiếp tục với draft an toàn hơn.</p></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-feedback" aria-labelledby="feedback-title">
+          <div class="section-heading">
+            <div><p class="eyebrow accent">VÒNG FEEDBACK HAI CHIỀU</p><h2 id="feedback-title">Phản hồi nằm trong công việc, không là một khảo sát tách rời.</h2></div>
+            <span class="status-badge green">Có thể tiếp tục</span>
+          </div>
+          <div class="feedback-grid">
+            <article class="panel feedback-form"><p class="eyebrow">EXPLICIT · USER → SYSTEM</p><h3>Đề xuất của Copilot có giúp bạn ra quyết định không?</h3><div class="rating-row"><button class="rating" data-rating="helpful">Hữu ích</button><button class="rating" data-rating="needs-work">Cần chỉnh</button><button class="rating" data-rating="wrong">Sai mục tiêu</button></div><label for="feedback-note">Điều gì cần thay đổi? <span>(tùy chọn)</span></label><textarea id="feedback-note" rows="4" placeholder="Ví dụ: hãy hỏi ngân sách trước khi đề xuất SD1.5."></textarea><button class="button button-primary" id="send-feedback">Gửi phản hồi</button><p class="microcopy">Bạn sẽ thấy feedback này được dùng thế nào trước khi gửi.</p><div class="feedback-confirm hidden" id="feedback-confirm"><span class="check">✓</span><p><strong>Đã ghi nhận cho phiên thử nghiệm.</strong> Nội dung sẽ được dùng để đánh giá flow này; không tự thay đổi cấu hình job hiện tại.</p></div></article>
+            <article class="panel matrix-card"><p class="eyebrow">MA TRẬN FEEDBACK</p><table><thead><tr><th></th><th>Explicit</th><th>Implicit</th></tr></thead><tbody><tr><th>User → System</th><td>Chọn lý do, sửa brief, xác nhận mapping</td><td>Đổi workflow, hoàn tác preview, mở bằng chứng, thời gian do dự</td></tr><tr><th>System → User</th><td>Nhật ký trạng thái, lý do hỏi, cảnh báo backend</td><td>Nút “Duyệt &amp; chạy” chỉ xuất hiện sau checklist; cảnh báo màu và thứ bậc nội dung</td></tr></tbody></table><p class="table-note">Hành vi không tự động được coi là ý định hay ground truth. Ví dụ: “Undo” có thể do AI sai hoặc người dùng đổi ý.</p></article>
+            <article class="panel completion-card"><p class="eyebrow">SYSTEM FEEDBACK · NEXT STEP</p><h3>Draft của bạn đã an toàn để tiếp tục.</h3><p id="completion-copy">Bạn đã biết điều gì AI hiểu, điều gì chưa chắc, và có thể kiểm tra hoặc sửa ở đâu.</p><div class="next-step"><span>→</span><p><strong>Bước tiếp theo:</strong> chọn một hướng khôi phục hoặc quay lại sửa cấu hình, sau đó duyệt job bằng một xác nhận rõ ràng.</p></div><button class="button button-dark" data-go="review">Quay lại bản kế hoạch</button></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-scenarios" aria-labelledby="scenarios-title">
+          <div class="section-heading"><div><p class="eyebrow accent">BẢN ĐỒ BAO PHỦ RUBRIC</p><h2 id="scenarios-title">Một lát cắt, đủ trạng thái và quyền kiểm soát.</h2></div><button class="button button-ghost" data-go="onboarding">Quay lại prototype</button></div>
+          <div class="scenario-board">
+            <article><span>T0</span><h3>Onboarding</h3><p>Nói rõ năng lực, giới hạn, dữ liệu cần dùng và quyền rút lại bối cảnh.</p><a href="#" data-go="onboarding">Mở trạng thái</a></article>
+            <article><span>T1</span><h3>Nhu cầu mơ hồ</h3><p>AI chỉ hỏi lựa chọn có tác động lớn nhất thay vì ép điền form dài.</p><a href="#" data-go="brief">Mở trạng thái</a></article>
+            <article><span>T2</span><h3>Ask trước hành động</h3><p>Không tự chọn workflow tốn GPU/API khi ý định còn mơ hồ.</p><a href="#" data-go="brief">Mở trạng thái</a></article>
+            <article><span>T3</span><h3>Evidence &amp; review</h3><p>Tách fact, assumption và constraint để người dùng kiểm tra dự thảo.</p><a href="#" data-go="review">Mở trạng thái</a></article>
+            <article><span>F1</span><h3>Backend failure</h3><p>Don't Act: không âm thầm giảm chất lượng khi thiếu backend; đưa ba đường khôi phục.</p><a href="#" data-go="recovery">Mở trạng thái</a></article>
+            <article><span>F2</span><h3>Ambiguous mapping</h3><p>Không tự map “coffee cup” sang <code>mug</code> khi độ tin cậy thấp.</p><a href="#" data-go="recovery">Mở trạng thái</a></article>
+          </div>
+          <div class="rationale-board">
+            <h3>Rationale tóm tắt</h3>
+            <div class="rationale-grid"><div><strong>Act</strong><p>Thêm preview 5 ảnh vì rủi ro thấp, dễ phát hiện và hoàn tác được.</p></div><div><strong>Ask</strong><p>Xin duyệt workflow trước khi có chi phí GPU/API và trước khi tạo dữ liệu cần kiểm tra.</p></div><div><strong>Don't Act</strong><p>Dừng khi backend không xác nhận hoặc object mapping mơ hồ; hậu quả sai khó nhận ra ngay.</p></div></div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
